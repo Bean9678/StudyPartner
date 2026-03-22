@@ -1,0 +1,17 @@
+h1{
+    color: red;
+    font-weight: 300;
+
+}
+
+ul li{
+    list-style: none;
+}
+
+.li-s{
+    color: red;
+}
+
+.li-s1{
+    color: blueviolet;
+}

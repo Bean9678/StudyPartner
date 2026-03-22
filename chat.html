@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPartner - Phòng Trực Tiếp</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="bg-shape bg-shape-1" style="width: 300px; height: 300px; top: -50px; left: -50px;"></div>
+  
+  <nav class="navbar" style="padding: 0.75rem 2rem;">
+    <div class="nav-brand" style="font-size: 1.25rem;">StudyPartner</div>
+    <div class="nav-user">
+      <button id="home-btn" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.85rem;">Trang chủ</button>
+      <button id="next-btn" class="btn btn-danger" style="padding: 6px 16px; font-size: 0.9rem;">Bạn tiếp theo ➤</button>
+    </div>
+  </nav>
+
+  <div class="chat-layout">
+    <!-- WebRTC Video Container -->
+    <div class="video-section">
+      <div class="video-container" id="video-container">
+        <!-- Remote User Video -->
+        <video id="remote-video" class="remote-video" autoplay playsinline></video>
+        <!-- Self Video -->
+        <video id="local-video" class="local-video" autoplay playsinline muted></video>
+        
+        <div class="video-controls">
+          <button id="btn-toggle-video" class="control-btn" title="Chuyển đổi Camera">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M23 7l-7 5 7 5V7z"></path>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+            </svg>
+          </button>
+          <button id="btn-toggle-audio" class="control-btn" title="Chuyển đổi Micro">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text Chat Container -->
+    <div class="chat-section glass-panel">
+      <div class="chat-header">
+        <div class="partner-info" style="display: flex; align-items: center; gap: 12px;">
+          <img id="partner-avatar" src="https://ui-avatars.com/api/?name=Partner&background=random" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--glass-border);">
+          <div>
+            <h3 id="partner-username" style="margin:0;">Đang kết nối...</h3>
+            <div class="partner-status">
+              <span id="partner-status-dot" class="status-dot"></span>
+              <span id="partner-status-text">Đang chờ tín hiệu</span>
+            </div>
+          </div>
+        </div>
+        <div id="partner-filters-display" style="font-size: 0.75rem; color: var(--text-muted); max-width: 150px; text-align: right;">
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+      </div>
+      
+      <div id="typing-indicator" class="typing-indicator" style="display: none;">
+        Bạn học đang gõ...
+      </div>
+
+      <form id="chat-form" class="chat-input-area">
+        <input type="text" id="message-input" placeholder="Nhập tin nhắn..." autocomplete="off" disabled>
+        <button type="submit" id="send-btn" class="send-btn" disabled>
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" class="feather">
+             <line x1="22" y1="2" x2="11" y2="13"></line>
+             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/chat.js"></script>
+</body>
+</html>

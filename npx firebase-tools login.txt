@@ -1,0 +1,1 @@
+npx firebase-tools login

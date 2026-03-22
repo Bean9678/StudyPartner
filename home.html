@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPartner - Trang Chủ</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .avatar-wrapper {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid var(--primary);
+    }
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .avatar-wrapper:hover::after {
+      content: 'Thay';
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 0.65rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ONBOARDING MODAL OVERLAY -->
+  <div id="onboarding-overlay" style="position:fixed; inset:0; z-index:9999; display:none; justify-content:center; align-items:center; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);">
+    <div class="auth-container glass-panel animate-fade-up" style="width: 100%; max-width: 400px; padding: 2.5rem 2rem;">
+      <h2 style="margin-bottom: 1rem; text-align: center; color: var(--text-main); font-size: 1.6rem;">Hoàn tất hồ sơ</h2>
+      <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">Vui lòng xác nhận thông tin cơ bản để bắt đầu ghép cặp chính xác.</p>
+      
+      <div class="input-group">
+        <label>Tên hiển thị của bạn</label>
+        <input type="text" id="onboard-name" required placeholder="Tên của bạn">
+      </div>
+      <div class="input-group">
+        <label>Tuổi của bạn</label>
+        <input type="number" id="onboard-age" min="10" max="99" required placeholder="Ví dụ: 16">
+      </div>
+      <div class="input-group">
+        <label>Giới tính của bạn</label>
+        <select id="onboard-gender">
+          <option value="Nam">Nam</option>
+          <option value="Nữ">Nữ</option>
+          <option value="Khác">Khác</option>
+        </select>
+      </div>
+      <div class="error-message" id="onboard-error"></div>
+      <button id="btn-save-onboard" class="btn btn-primary btn-block" style="padding: 14px; font-size: 1.05rem;">Lưu và Bắt đầu học tập</button>
+    </div>
+  </div>
+  
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">StudyPartner</div>
+    <div class="nav-user">
+      <div class="avatar-wrapper" onclick="document.getElementById('avatar-upload').click()">
+         <img id="nav-avatar" src="https://ui-avatars.com/api/?name=User&background=random" alt="Avatar">
+      </div>
+      <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+      
+      <span class="nav-username" id="display-name">Đang tải...</span>
+      <button id="logout-btn" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">Đăng xuất</button>
+    </div>
+  </nav>
+
+  <!-- Floating Settings Toggle Button -->
+  <button id="pref-toggle-btn" class="pref-toggle-btn" title="Bộ lọc tìm kiếm">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+  </button>
+
+  <!-- Preferences Dashboard -->
+  <div id="pref-panel" class="pref-panel glass-panel">
+    <h3>Bộ lọc tìm kiếm</h3>
+    <form id="pref-form">
+      <div class="input-group">
+        <label>Lớp học</label>
+        <select id="pref-grade">
+          <option>6</option><option>7</option><option>8</option>
+          <option>9</option><option>10</option><option>11</option>
+          <option>12</option><option>Đại học</option><option>Khác</option>
+        </select>
+      </div>
+      
+      <!-- Gender and Age filters have been completely removed from Matching Screen per user request -->
+
+      <div class="input-group">
+        <label>Môn học</label>
+        <div class="multi-select-grid" id="pref-subjects">
+          <label class="checkbox-label"><input type="checkbox" value="Toán" checked> Toán</label>
+          <label class="checkbox-label"><input type="checkbox" value="Ngữ văn"> Ngữ văn</label>
+          <label class="checkbox-label"><input type="checkbox" value="Tiếng Anh"> Tiếng Anh</label>
+          <label class="checkbox-label"><input type="checkbox" value="Vật lý"> Vật lý</label>
+          <label class="checkbox-label"><input type="checkbox" value="Hóa học"> Hóa học</label>
+          <label class="checkbox-label"><input type="checkbox" value="Sinh học"> Sinh học</label>
+          <label class="checkbox-label"><input type="checkbox" value="Lịch sử"> Lịch sử</label>
+          <label class="checkbox-label"><input type="checkbox" value="Địa lý"> Địa lý</label>
+          <label class="checkbox-label"><input type="checkbox" value="TSA"> ĐGNL (TSA)</label>
+          <label class="checkbox-label"><input type="checkbox" value="HSA"> ĐGNL (HSA)</label>
+          <label class="checkbox-label"><input type="checkbox" value="IELTS"> IELTS</label>
+          <label class="checkbox-label"><input type="checkbox" value="SAT"> SAT</label>
+          <label class="checkbox-label"><input type="checkbox" value="Khác"> Môn khác</label>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Trình độ</label>
+        <select id="pref-level">
+          <option>Cơ bản</option><option>Nâng cao</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Khu vực / Tỉnh thành</label>
+        <select id="pref-region">
+          <option>Hà Nội</option><option>Hồ Chí Minh</option><option>Hải Phòng</option>
+          <option>Đà Nẵng</option><option>Cần Thơ</option><option>Huế</option>
+          <option>An Giang</option><option>Bà Rịa - Vũng Tàu</option><option>Bắc Giang</option>
+          <option>Bắc Kạn</option><option>Bạc Liêu</option><option>Bắc Ninh</option>
+          <option>Bến Tre</option><option>Bình Định</option><option>Bình Dương</option>
+          <option>Bình Phước</option><option>Bình Thuận</option><option>Cà Mau</option>
+          <option>Cao Bằng</option><option>Đắk Lắk</option><option>Đắk Nông</option>
+          <option>Điện Biên</option><option>Đồng Nai</option><option>Đồng Tháp</option>
+          <option>Gia Lai</option><option>Hà Giang</option><option>Hà Nam</option>
+          <option>Hà Tĩnh</option><option>Hải Dương</option><option>Hậu Giang</option>
+          <option>Hòa Bình</option><option>Hưng Yên</option><option>Khánh Hòa</option>
+          <option>Kiên Giang</option><option>Kon Tum</option>
+        </select>
+      </div>
+      <div id="save-indicator" class="save-indicator">Đã lưu thông tin ✔</div>
+    </form>
+  </div>
+
+  <main class="main-content">
+    <div class="match-container glass-panel animate-fade-up">
+      <div id="status-icon" class="match-icon">
+        <svg id="icon-idle" viewBox="0 0 24 24" width="48" height="48" stroke="url(#paint0_linear)" stroke-width="2" fill="none">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <h2 id="status-text" class="match-status">Sẵn sàng học tập?</h2>
+      <p id="status-desc" class="match-details">Thiết lập bộ lọc tìm kiếm và nhấp vào nút bên dưới để hệ thống ghép cặp ngay lập tức.</p>
+      
+      <button id="find-partner-btn" class="btn btn-primary btn-block" style="padding: 16px; font-size: 1.1rem; border-radius: 16px;">
+        Tìm bạn học
+      </button>
+
+      <div id="active-filters" style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        <!-- Active filters populated by JS -->
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/home.js"></script>
+</body>
+</html>
