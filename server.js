@@ -91,9 +91,6 @@ io.on('connection', (socket) => {
 
 // Use Environment port assigned by your Hosting Provider (Render, Heroku, etc.)
 const PORT = process.env.PORT || 3000;
-app.get('/', (req, res) => {
-    res.send('StudyPartner Server is running');
-});
 server.listen(PORT, () => {
     console.log(`[🚀 SERVER LIVE] Engine running on port ${PORT}`);
 });
