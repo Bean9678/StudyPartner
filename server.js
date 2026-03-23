@@ -3,6 +3,11 @@ const http = require('http');
 const { Server } = require('socket.io');
 
 const app = express();
+app.use(express.static('.')); // Serve HTML files from root
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 const server = http.createServer(app);
 
 // 1. Enable CORS so BOTH Web and Mobile apps can connect to this deployed server!
